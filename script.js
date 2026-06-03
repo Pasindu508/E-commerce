@@ -101,17 +101,46 @@ const DOM = {
     closeAnnounceBtn: document.getElementById('closeAnnouncement'),
     applyPromoBtn: document.getElementById('applyPromoBtn'),
     promoInput: document.getElementById('promoInput'),
-    promoFeedback: document.getElementById('promoFeedback')
+    promoFeedback: document.getElementById('promoFeedback'),
+    // Core Router Nav Triggers
+    viewSections: document.querySelectorAll('.view-section'),
+    navLinks: document.querySelectorAll('.nav-link, .nav-logo, .footer-nav-link')
 };
 
 // ==========================================================================
-// 4. BUSINESS CORE AND UI RENDER ENGINES
+// 4. ROUTER ENGINE (VIEW SWITCHING MAPPING)
 // ==========================================================================
+function switchView(targetViewId) {
+    if (!targetViewId) return;
 
+    // Toggle view section visibility classes
+    DOM.viewSections.forEach(section => {
+        if (section.id === targetViewId) {
+            section.classList.remove('hidden');
+        } else {
+            section.classList.add('hidden');
+        }
+    });
+
+    // Synchronize navigation header link highlights
+    DOM.navLinks.forEach(link => {
+        if (link.getAttribute('data-target') === targetViewId && link.classList.contains('nav-link')) {
+            link.classList.add('active');
+        } else if (link.classList.contains('nav-link')) {
+            link.classList.remove('active');
+        }
+    });
+
+    // Bring viewport back to clean upper margins
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ==========================================================================
+// 5. BUSINESS CORE AND UI RENDER ENGINES
+// ==========================================================================
 function renderProductGrid() {
     let targetProducts = [...storeState.products];
 
-    // Execution of Sorting/Filtering Channels Rules
     if (storeState.filters.category !== 'all') {
         targetProducts = targetProducts.filter(item => item.category === storeState.filters.category);
     }
@@ -139,6 +168,7 @@ function renderProductGrid() {
         return `
             <article class="product-card" data-id="${product.id}">
                 <div class="product-image-wrap">
+                    <!-- FEATURE 2: WISHLIST TOGGLE ICON BUTTON -->
                     <button class="wishlist-btn" aria-label="Add to wishlist">
                         <i class="fa-regular fa-heart"></i>
                     </button>
@@ -209,16 +239,16 @@ function updateCartUI() {
     // Dynamic Balance Computations
     const calculatedSubtotal = storeState.cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
     
-    // Process Promo Deductions
+    // Process FEATURE 3: Promo Deductions
     const discountAmount = calculatedSubtotal * storeState.appliedDiscount;
     const runningSubtotalAfterDiscount = calculatedSubtotal - discountAmount;
     
     const operationalTaxValue = runningSubtotalAfterDiscount * storeState.taxRate;
     const finalInvoiceTotal = runningSubtotalAfterDiscount + operationalTaxValue;
 
-    // Output formatting
+    // Balance output rendering formatting
     if (discountAmount > 0) {
-        DOM.cartSubtotal.innerHTML = `<del>$${calculatedSubtotal.toFixed(2)}</del> <span style="color:#487858; margin-left: 8px;">-$${discountAmount.toFixed(2)}</span>`;
+        DOM.cartSubtotal.innerHTML = `<del>$${calculatedSubtotal.toFixed(2)}</del> <span style="color:#487858; margin-left: 8px; font-weight: 600;">-$${discountAmount.toFixed(2)}</span>`;
     } else {
         DOM.cartSubtotal.textContent = `$${calculatedSubtotal.toFixed(2)}`;
     }
@@ -280,11 +310,20 @@ function toggleCartDrawer(forceState) {
 }
 
 // ==========================================================================
-// 5. EVENT HANDLERS & BOOTSTRAP CHANNELS
+// 6. EVENT HANDLERS & BOOTSTRAP CHANNELS
 // ==========================================================================
 function bindApplicationEventsListeners() {
     
-    // Category filtering
+    // Multi-page layout switching routing links listener loop
+    DOM.navLinks.forEach(linkElement => {
+        linkElement.addEventListener('click', (event) => {
+            event.preventDefault();
+            const destinationView = linkElement.getAttribute('data-target');
+            switchView(destinationView);
+        });
+    });
+
+    // Shop item category filtering
     DOM.filterBtns.forEach(buttonElement => {
         buttonElement.addEventListener('click', (e) => {
             DOM.filterBtns.forEach(btn => btn.classList.remove('active'));
@@ -295,13 +334,13 @@ function bindApplicationEventsListeners() {
         });
     });
 
-    // Catalog sorting
+    // Catalog sorting pricing pipeline
     DOM.sortSelect.addEventListener('change', (e) => {
         storeState.filters.sort = e.target.value;
         renderProductGrid();
     });
 
-    // Main product actions catch delegation
+    // Main product actions catch delegation (Basket pushes & Wishlist switches)
     DOM.productGrid.addEventListener('click', (eventInstance) => {
         const closestAddBtn = eventInstance.target.closest('.add-to-cart-trigger');
         const wishBtn = eventInstance.target.closest('.wishlist-btn');
@@ -323,7 +362,7 @@ function bindApplicationEventsListeners() {
         }
     });
 
-    // Cart modification actions delegation
+    // Cart line unit alteration captures
     DOM.cartItemsContainer.addEventListener('click', (eventContext) => {
         const targetElement = eventContext.target;
         const lineItemCard = targetElement.closest('.cart-item');
@@ -342,25 +381,25 @@ function bindApplicationEventsListeners() {
         }
     });
 
-    // Drawer visibility triggers
+    // Drawer togglers
     DOM.cartToggle.addEventListener('click', () => toggleCartDrawer(true));
     DOM.cartClose.addEventListener('click', () => toggleCartDrawer(false));
     DOM.cartOverlay.addEventListener('click', () => toggleCartDrawer(false));
 
-    // Top announcement bar dismissal
+    // FEATURE 1: Top announcement bar dismissal action
     if (DOM.closeAnnounceBtn && DOM.announceBar) {
         DOM.closeAnnounceBtn.addEventListener('click', () => {
             DOM.announceBar.style.display = 'none';
         });
     }
 
-    // Promo Code Valuation Pipeline
+    // FEATURE 3: Promo Code Pipeline calculation execution
     if (DOM.applyPromoBtn && DOM.promoInput) {
         DOM.applyPromoBtn.addEventListener('click', () => {
             const enteredCode = DOM.promoInput.value.trim().toUpperCase();
             
             if (enteredCode === 'SLOW10') {
-                storeState.appliedDiscount = 0.10; // 10% Off calculated base invoice
+                storeState.appliedDiscount = 0.10; // Deduct 10% from total invoice base
                 DOM.promoFeedback.textContent = "Code 'SLOW10' applied! 10% savings deducted.";
                 DOM.promoFeedback.className = "promo-feedback success";
                 updateCartUI();
@@ -371,7 +410,7 @@ function bindApplicationEventsListeners() {
         });
     }
 
-    // Checkout pipeline simulation execution
+    // Checkout sandbox execution alert handler
     DOM.checkoutBtn.addEventListener('click', () => {
         alert('🌿 Thank you for walking the slow path. Your order checkout simulation is successfully complete.');
         storeState.cart = [];
@@ -391,7 +430,7 @@ function initializeStorefront() {
     renderProductGrid();
     updateCartUI();
 
-    // Structural contextual synchronizations
+    // Context synchronization safety validations
     if (DOM.currentYear) {
         DOM.currentYear.textContent = new Date().getFullYear();
     }
