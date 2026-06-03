@@ -4,29 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MUKU // Handcrafted Sustainable Home Goods</title>
+    <!-- Google Fonts: Cormorant Garamond for elegant display headers & Plus Jakarta Sans for clean UI text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="announcement-bar" id="announcementBar">
-    <p>Complimentary carbon-neutral shipping on orders over $150 • Next kiln opening Friday</p>
-    <button class="close-announcement-btn" id="closeAnnouncement" aria-label="Dismiss banner">
-        <i class="fa-solid fa-xmark"></i>
-    </button>
-</div>
+    <!-- FEATURE 1: ANNOUNCEMENT BAR -->
+    <div class="announcement-bar" id="announcementBar">
+        <p>Complimentary carbon-neutral shipping on orders over $150 • Next kiln opening Friday</p>
+        <button class="close-announcement-btn" id="closeAnnouncement" aria-label="Dismiss banner">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
 
+    <!-- STICKY NAVIGATION BAR -->
     <header class="navbar">
         <div class="nav-container container">
-            <a href="#" class="nav-logo">MUKU</a>
+            <a href="#" class="nav-logo" data-target="objects-view">MUKU</a>
             
             <nav class="nav-menu">
-                <a href="#" class="nav-link active">Objects</a>
-                <a href="#" class="nav-link">Our Studio</a>
-                <a href="#" class="nav-link">Journal</a>
+                <a href="#" class="nav-link active" data-target="objects-view">Objects</a>
+                <a href="#" class="nav-link" data-target="studio-view">Our Studio</a>
+                <a href="#" class="nav-link" data-target="journal-view">Journal</a>
             </nav>
 
             <div class="nav-actions">
@@ -44,47 +49,167 @@
     </header>
 
     <main>
-        <section class="hero">
-            <div class="hero-content container">
-                <span class="hero-tagline">Intentional, Slow Living</span>
-                <h1 class="hero-title">Honoring the beauty<br>of imperfection.</h1>
-                <p class="hero-subtitle">A thoughtful collection of sustainable home goods and hand-thrown ceramic ware, crafted by artisans to bring quiet luxury to your daily rituals.</p>
-                <a href="#shop-section" class="btn btn-primary">Explore the Collection <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-            <div class="hero-overlay"></div>
-        </section>
+        <!-- VIEW 1: OBJECTS CATALOGUE (HOME) -->
+        <div id="objects-view" class="view-section">
+            <!-- HERO SECTION -->
+            <section class="hero">
+                <div class="hero-content container">
+                    <span class="hero-tagline">Intentional, Slow Living</span>
+                    <h1 class="hero-title">Honoring the beauty<br>of imperfection.</h1>
+                    <p class="hero-subtitle">A thoughtful collection of sustainable home goods and hand-thrown ceramic ware, crafted by artisans to bring quiet luxury to your daily rituals.</p>
+                    <a href="#shop-section" class="btn btn-primary">Explore the Collection <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="hero-overlay"></div>
+            </section>
 
-        <section class="shop-section container" id="shop-section">
-            
-            <div class="controls-bar">
-                <div class="filter-group">
-                    <button class="filter-btn active" data-category="all">All Objects</button>
-                    <button class="filter-btn" data-category="Ceramics">Ceramics</button>
-                    <button class="filter-btn" data-category="Textiles">Textiles</button>
-                    <button class="filter-btn" data-category="Apothecary">Apothecary</button>
-                    <button class="filter-btn" data-category="Organization">Organization</button>
+            <!-- SHOP & CATALOGUE SECTION -->
+            <section class="shop-section container" id="shop-section">
+                <!-- CONTROL BAR (FILTER & SORT) -->
+                <div class="controls-bar">
+                    <div class="filter-group">
+                        <button class="filter-btn active" data-category="all">All Objects</button>
+                        <button class="filter-btn" data-category="Ceramics">Ceramics</button>
+                        <button class="filter-btn" data-category="Textiles">Textiles</button>
+                        <button class="filter-btn" data-category="Apothecary">Apothecary</button>
+                        <button class="filter-btn" data-category="Organization">Organization</button>
+                    </div>
+                    
+                    <div class="sort-group">
+                        <label for="sort-select" class="sr-only">Sort objects:</label>
+                        <i class="fa-solid fa-sliders sort-icon"></i>
+                        <select id="sort-select" class="sort-select">
+                            <option value="default">Curated</option>
+                            <option value="low-high">Price: Low to High</option>
+                            <option value="high-low">Price: High to Low</option>
+                        </select>
+                    </div>
                 </div>
-                
-                <div class="sort-group">
-                    <label for="sort-select" class="sr-only">Sort objects:</label>
-                    <i class="fa-solid fa-sliders sort-icon"></i>
-                    <select id="sort-select" class="sort-select">
-                        <option value="default">Curated</option>
-                        <option value="low-high">Price: Low to High</option>
-                        <option value="high-low">Price: High to Low</option>
-                    </select>
-                </div>
-            </div>
 
-            <div class="product-grid" id="productGrid">
+                <!-- PRODUCT GRID -->
+                <div class="product-grid" id="productGrid">
+                    <!-- Dynamic Products Rendered via JavaScript -->
                 </div>
-        </section>
+            </section>
+        </div>
+
+        <!-- VIEW 2: OUR STUDIO PAGE -->
+        <div id="studio-view" class="view-section hidden">
+            <section class="studio-hero container">
+                <span class="view-tagline">The MUKU Ethos</span>
+                <h1 class="view-title">Crafting the slow path.</h1>
+                <div class="studio-grid">
+                    <div class="studio-text">
+                        <p class="editorial-lead">MUKU is born from a desire to strip away modern noise. Inspired by Japanese minimalism and Scandinavian warmth (Japandi), we forge items that serve as anchors for quiet mindfulness.</p>
+                        <p>Our studio pairs timeless ancestral production techniques with rigorous ecological standards. Every ceramic vessel carries raw thumbprints from the wheel; every textile features hand-dyed organic flax lineations. We do not mass produce. We drop limited collections aligned with changing seasons, working side-by-side with localized workshops in Kyoto, Shigaraki, and coastal Portugal.</p>
+                    </div>
+                    <div class="studio-image-frame">
+                        <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800&q=80" alt="Artisan molding raw clay vessel" class="studio-img">
+                    </div>
+                </div>
+            </section>
+
+            <section class="sourcing-matrix-section">
+                <div class="container">
+                    <h2 class="section-subheading">Our Sourcing Matrix</h2>
+                    <p class="section-desc">Radical traceability. We track every thread and mineral compound back to its origin point.</p>
+                    
+                    <div class="table-scroll-container">
+                        <table class="matrix-table">
+                            <thead>
+                                <tr>
+                                    <th>Material</th>
+                                    <th>Extraction Site</th>
+                                    <th>Processing Style</th>
+                                    <th>Eco Impact Factor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Stoneware Clay</strong></td>
+                                    <td>Shigaraki, Japan</td>
+                                    <td>Traditional wood-kiln fired</td>
+                                    <td>100% Biodegradable, zero toxic glazing</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Organic Flax Linen</strong></td>
+                                    <td>Guimarães, Portugal</td>
+                                    <td>Rain-cultivated, raw dew-retted</td>
+                                    <td>Saves 4,000L of water per metric bolt</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Raw Travertine</strong></td>
+                                    <td>Tivoli, Italy</td>
+                                    <td>Reclaimed masonry quarry blocks</td>
+                                    <td>Zero carbon extraction emissions</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Natural Rattan</strong></td>
+                                    <td>Kalimantan, Indonesia</td>
+                                    <td>Wild harvested forest vines</td>
+                                    <td>Supports canopy conservation initiatives</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- VIEW 3: JOURNAL PAGE -->
+        <div id="journal-view" class="view-section hidden">
+            <section class="journal-wrapper container">
+                <div class="journal-header text-center">
+                    <span class="view-tagline">MUKU Chronicals</span>
+                    <h1 class="view-title">Essays on space and time.</h1>
+                    <p class="hero-subtitle">A collection of seasonal thoughts, care practices, and design studies curated by our workshop team.</p>
+                </div>
+
+                <div class="journal-grid">
+                    <article class="journal-card">
+                        <div class="journal-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80" alt="Minimal clean bed setting" class="journal-img">
+                        </div>
+                        <div class="journal-meta">
+                            <span class="journal-date">June 2026</span> • <span class="journal-cat">Philosophy</span>
+                        </div>
+                        <h2 class="journal-title">The Art of Wabi-Sabi in Modern Spaces</h2>
+                        <p class="journal-excerpt">How embracing texture, raw asymmetrical cracks, and aging surfaces shields our homes from the anxiety of superficial perfectionism.</p>
+                        <a href="#" class="journal-link">Read Essay <i class="fa-solid fa-arrow-right-long"></i></a>
+                    </article>
+
+                    <article class="journal-card">
+                        <div class="journal-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&q=80" alt="Pouring tea into ceramic mug" class="journal-img">
+                        </div>
+                        <div class="journal-meta">
+                            <span class="journal-date">May 2026</span> • <span class="journal-cat">Rituals</span>
+                        </div>
+                        <h2 class="journal-title">Cultivating a Slow Morning Architecture</h2>
+                        <p class="journal-excerpt">We explore the psychological impact of tactile morning tools—from heavy stoneware mugs to the rhythm of slow-drip linen coffee filters.</p>
+                        <a href="#" class="journal-link">Read Essay <i class="fa-solid fa-arrow-right-long"></i></a>
+                    </article>
+
+                    <article class="journal-card">
+                        <div class="journal-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1610701596007-11502861afab?w=600&q=80" alt="Washing ceramics" class="journal-img">
+                        </div>
+                        <div class="journal-meta">
+                            <span class="journal-date">April 2026</span> • <span class="journal-cat">Preservation</span>
+                        </div>
+                        <h2 class="journal-title">Longevity Care: Hand-Thrown Ceramics</h2>
+                        <p class="journal-excerpt">Uncoated clay bodies require deliberate care. Learn how thermal shock tracking and organic oil seals preserve clay structures across decades.</p>
+                        <a href="#" class="journal-link">Read Essay <i class="fa-solid fa-arrow-right-long"></i></a>
+                    </article>
+                </div>
+            </section>
+        </div>
     </main>
 
+    <!-- SITE FOOTER -->
     <footer class="site-footer">
         <div class="footer-container container">
             <div class="footer-col brand-col">
-                <a href="#" class="footer-logo">MUKU</a>
+                <a href="#" class="footer-logo" data-target="objects-view">MUKU</a>
                 <p class="footer-desc">Creating spaces of calm and restoration through sustainable, organic textures and timeless craftsmanship.</p>
                 <div class="footer-socials">
                     <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -96,20 +221,20 @@
             <div class="footer-col">
                 <h4 class="footer-heading">Collections</h4>
                 <ul class="footer-links">
-                    <li><a href="#shop-section">All Artifacts</a></li>
-                    <li><a href="#shop-section">Ceramic Studies</a></li>
-                    <li><a href="#shop-section">Woven Textiles</a></li>
-                    <li><a href="#shop-section">Botanical Aromatics</a></li>
+                    <li><a href="#" class="footer-nav-link" data-target="objects-view">All Artifacts</a></li>
+                    <li><a href="#" class="footer-nav-link" data-target="objects-view">Ceramic Studies</a></li>
+                    <li><a href="#" class="footer-nav-link" data-target="objects-view">Woven Textiles</a></li>
+                    <li><a href="#" class="footer-nav-link" data-target="objects-view">Botanical Aromatics</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
                 <h4 class="footer-heading">Our Studio</h4>
                 <ul class="footer-links">
-                    <li><a href="#">The Slow Path</a></li>
-                    <li><a href="#">Artisan Registry</a></li>
-                    <li><a href="#">Care Guidelines</a></li>
-                    <li><a href="#">Sourcing Matrix</a></li>
+                    <li><a href="#" class="footer-nav-link" data-target="studio-view">The Slow Path</a></li>
+                    <li><a href="#" class="footer-nav-link" data-target="studio-view">Artisan Registry</a></li>
+                    <li><a href="#" class="footer-nav-link" data-target="studio-view">Care Guidelines</a></li>
+                    <li><a href="#" class="footer-nav-link" data-target="studio-view">Sourcing Matrix</a></li>
                 </ul>
             </div>
 
@@ -136,6 +261,7 @@
         </div>
     </footer>
 
+    <!-- SHOPPING CART DRAWER -->
     <div class="cart-overlay" id="cartOverlay"></div>
     <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
         <div class="cart-header">
@@ -145,21 +271,25 @@
             </button>
         </div>
 
+        <!-- Cart Items -->
         <div class="cart-items" id="cartItemsContainer">
-            </div>
+            <!-- Dynamic Cart Items Rendered via JavaScript -->
+        </div>
 
+        <!-- Cart Summary Footer -->
         <div class="cart-footer">
-
-            <div class="promo-container">
-              <input type="text" id="promoInput" placeholder="Enter studio code (e.g., SLOW10)" aria-label="Promo code">
-              <button type="button" id="applyPromoBtn" class="btn-promo">Apply</button>
-</div>
-<div id="promoFeedback" class="promo-feedback"></div>
-
             <div class="summary-row">
                 <span>Subtotal</span>
                 <span id="cartSubtotal">$0.00</span>
             </div>
+            
+            <!-- FEATURE 3: PROMO INPUT UI -->
+            <div class="promo-container">
+                <input type="text" id="promoInput" placeholder="Enter studio code (e.g., SLOW10)" aria-label="Promo code">
+                <button type="button" id="applyPromoBtn" class="btn-promo">Apply</button>
+            </div>
+            <div id="promoFeedback" class="promo-feedback"></div>
+
             <div class="summary-row">
                 <span>Eco-Packaging & Tax (8%)</span>
                 <span id="cartTax">$0.00</span>
@@ -176,6 +306,7 @@
         </div>
     </aside>
 
+    <!-- Scripts -->
     <script src="script.js"></script>
 </body>
 </html>
