@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUKU // Handcrafted Sustainable Home Goods</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="announcement-bar" id="announcementBar">
+    <p>Complimentary carbon-neutral shipping on orders over $150 • Next kiln opening Friday</p>
+    <button class="close-announcement-btn" id="closeAnnouncement" aria-label="Dismiss banner">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+</div>
+
+    <header class="navbar">
+        <div class="nav-container container">
+            <a href="#" class="nav-logo">MUKU</a>
+            
+            <nav class="nav-menu">
+                <a href="#" class="nav-link active">Objects</a>
+                <a href="#" class="nav-link">Our Studio</a>
+                <a href="#" class="nav-link">Journal</a>
+            </nav>
+
+            <div class="nav-actions">
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" placeholder="Search curated objects...">
+                </div>
+                
+                <button class="cart-toggle-btn" id="cartToggle" aria-label="Open Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content container">
+                <span class="hero-tagline">Intentional, Slow Living</span>
+                <h1 class="hero-title">Honoring the beauty<br>of imperfection.</h1>
+                <p class="hero-subtitle">A thoughtful collection of sustainable home goods and hand-thrown ceramic ware, crafted by artisans to bring quiet luxury to your daily rituals.</p>
+                <a href="#shop-section" class="btn btn-primary">Explore the Collection <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="hero-overlay"></div>
+        </section>
+
+        <section class="shop-section container" id="shop-section">
+            
+            <div class="controls-bar">
+                <div class="filter-group">
+                    <button class="filter-btn active" data-category="all">All Objects</button>
+                    <button class="filter-btn" data-category="Ceramics">Ceramics</button>
+                    <button class="filter-btn" data-category="Textiles">Textiles</button>
+                    <button class="filter-btn" data-category="Apothecary">Apothecary</button>
+                    <button class="filter-btn" data-category="Organization">Organization</button>
+                </div>
+                
+                <div class="sort-group">
+                    <label for="sort-select" class="sr-only">Sort objects:</label>
+                    <i class="fa-solid fa-sliders sort-icon"></i>
+                    <select id="sort-select" class="sort-select">
+                        <option value="default">Curated</option>
+                        <option value="low-high">Price: Low to High</option>
+                        <option value="high-low">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="product-grid" id="productGrid">
+                </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container container">
+            <div class="footer-col brand-col">
+                <a href="#" class="footer-logo">MUKU</a>
+                <p class="footer-desc">Creating spaces of calm and restoration through sustainable, organic textures and timeless craftsmanship.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
+                    <a href="#" aria-label="Journal"><i class="fa-solid fa-feather-pointed"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Collections</h4>
+                <ul class="footer-links">
+                    <li><a href="#shop-section">All Artifacts</a></li>
+                    <li><a href="#shop-section">Ceramic Studies</a></li>
+                    <li><a href="#shop-section">Woven Textiles</a></li>
+                    <li><a href="#shop-section">Botanical Aromatics</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Our Studio</h4>
+                <ul class="footer-links">
+                    <li><a href="#">The Slow Path</a></li>
+                    <li><a href="#">Artisan Registry</a></li>
+                    <li><a href="#">Care Guidelines</a></li>
+                    <li><a href="#">Sourcing Matrix</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col newsletter-col">
+                <h4 class="footer-heading">MUKU Gazette</h4>
+                <p class="footer-desc">Join our quiet community for seasonal lookbooks, studio notes, and priority access to limited kiln openings.</p>
+                <form class="footer-newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Enter your email address" required aria-label="Email address for newsletter">
+                    <button type="submit" class="newsletter-submit-btn" aria-label="Subscribe">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-container container">
+                <p class="copyright-text">&copy; <span id="currentYear">2026</span> MUKU Studio. Designed for intentional living.</p>
+                <div class="footer-legal-links">
+                    <a href="#">Privacy Protocol</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+        <div class="cart-header">
+            <h2 class="cart-title">Your Basket (<span id="cartCountHeader">0</span>)</h2>
+            <button class="cart-close-btn" id="cartClose" aria-label="Close Cart">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="cart-items" id="cartItemsContainer">
+            </div>
+
+        <div class="cart-footer">
+
+            <div class="promo-container">
+              <input type="text" id="promoInput" placeholder="Enter studio code (e.g., SLOW10)" aria-label="Promo code">
+              <button type="button" id="applyPromoBtn" class="btn-promo">Apply</button>
+</div>
+<div id="promoFeedback" class="promo-feedback"></div>
+
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">$0.00</span>
+            </div>
+            <div class="summary-row">
+                <span>Eco-Packaging & Tax (8%)</span>
+                <span id="cartTax">$0.00</span>
+            </div>
+            <hr class="summary-divider">
+            <div class="summary-row total-row">
+                <span>Total Balance</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            
+            <button class="btn btn-primary btn-block" id="checkoutBtn">
+                Proceed to Checkout
+            </button>
+        </div>
+    </aside>
+
+    <script src="script.js"></script>
+</body>
+</html>
